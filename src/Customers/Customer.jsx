@@ -1,6 +1,7 @@
 import '../App.css'
 import { useState } from 'react'
 import CustomerService from '../Services/Customer'
+import CustomerEdit from './CustomerEdit'
 
 
 // props on otettu vastaan suoraan nimellä suluissa
@@ -8,6 +9,7 @@ const Customer = ({customer,setMessage, setIsPositive, setShowMessage}) => {
 
 // Komponentin tilan määritys
 const [showDetails, setShowDetails] = useState(false)
+const [editing, setEditing] = useState(false)
 
 //Poistometodi
 const deleteCustomer = (cust) => {
@@ -69,28 +71,35 @@ const deleteCustomer = (cust) => {
 
        
        {showDetails && <div className="customerDetails">
-            <button>Edit</button>
+            <button onClick={() => setEditing (true)}>Edit</button>
             <button onClick={() => deleteCustomer(customer)}>Delete</button>
             <table>
                     <thead>
                         <tr>
                             <th>Contact person</th>
-                            <th>Phone</th>
                             <th>Address</th>
                             <th>City</th>
                             <th>Country</th>
+                            <th>Phone</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>{customer.contactName}</td>
-                            <td>{customer.phone}</td>
                             <td>{customer.address}</td>
                             <td>{customer.city}</td>
                             <td>{customer.country}</td>
+                            <td>{customer.phone}</td>
                         </tr>
                     </tbody>
                 </table>
+
+                {editing && <CustomerEdit custToEdit={customer} setEditing={setEditing} 
+                setMessage={setMessage} 
+                setIsPositive={setIsPositive}
+                setShowMessage={setShowMessage}
+                />}
+
                 </div>
                 }
 

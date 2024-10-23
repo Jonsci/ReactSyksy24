@@ -19,6 +19,13 @@ const baseUrl = 'https://localhost:7215/api/customers'
         return request.then(response => response.data)
     }
 
+    const edit = (object) => {
+        const request = axios.put(baseUrl + "/" + object.customerId, object)
+        return request.then(response => response.data)
+    }
+
+    
+
    
 
-    export default {getAll, addNew, remove}
+    export default {getAll, addNew, remove, edit}
