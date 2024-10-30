@@ -51,6 +51,9 @@ const handleSubmit = (event) => {
             setShowMessage(false)
         , 4000)
 
+         //Piilotetaan lisäyslomake
+      setAdding(false)
+
       })
       .catch(error => {
        //Näytetään message virhetilanteessakin
@@ -62,6 +65,9 @@ const handleSubmit = (event) => {
          setTimeout(() => 
              setShowMessage(false)
          , 4000)
+
+            //Piilotetaan lisäyslomake
+      setAdding(false)
       })
     }
 

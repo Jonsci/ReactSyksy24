@@ -7,7 +7,12 @@ import CustomerAdd from './CustomerAdd'
 //Messagen asettamiseen liittyvät metodit on välitetty tälle komponentille
 function CustomerList({setMessage, setIsPositive, setShowMessage}) {
 
-
+//State määrittely
+const [customers, setCustomers] = useState([])
+const [show, setShow] = useState(false)
+const [adding, setAdding] = useState(false)
+//Hakukentän state 
+const [search, setSearch] = useState("")
 
 // useEffect kutsutaan aina alussa
 //2. parametrina tyhjä taulukko, jotta useEffect kutsutaan vain kerran
@@ -16,14 +21,7 @@ useEffect(() => {
     // fetch('https://localhost:7215/api/customers')
     // .then(response => response.json()) //javascript muotoon json muodosta
     .then(data => setCustomers(data)) // asetetaan stateen nimeltä customers
-}, [])
-
-//State määrittely
-const [customers, setCustomers] = useState([])
-const [show, setShow] = useState(false)
-const [adding, setAdding] = useState(false)
-//Hakukentän state 
-const [search, setSearch] = useState("")
+}, [adding])
 
 
 
@@ -54,8 +52,8 @@ const [search, setSearch] = useState("")
 
                 const lowerCaseName = cust.companyName.toLowerCase()
 
-                if (lowerCaseName.indexOf(search) > -1) {
-                    return(
+            if (lowerCaseName.indexOf(search.toLocaleLowerCase()) > -1) {
+            return(
             <Customer key={cust.customerId} customer = {cust}
             setMessage={setMessage}setIsPositive={setIsPositive} 
             setShowMessage={setShowMessage} />
